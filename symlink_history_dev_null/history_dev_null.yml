@@ -1,0 +1,20 @@
+- name: Nested for loop
+  hosts: "{{ target_ip }}"
+  vars:
+    target_user_list:
+      - alice
+      - bob
+      - mallory
+    target_file_list:
+      - .lesshst
+      - .wget-hsts
+      - .bash_history
+  tasks:
+    - name: Nested loop example
+      include_tasks: "symlink_procedure.yml"
+      loop: "{{ target_user_list | product(target_file_list) }}"      ## this achieves the nested loop behavior
+      loop_control:
+        loop_var: my_item
+      vars:
+        target_user: "{{ my_item.0 }}"
+        target_file: "{{ my_item.1 }}"

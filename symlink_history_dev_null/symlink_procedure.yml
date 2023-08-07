@@ -1,0 +1,6 @@
+- name: "FILE MODULE setup symlink {{ target_file }} to /dev/null for user: {{ target_user }}"
+  file:
+    src:  /dev/null
+    dest: /home/{{target_user}}/{{target_file}}
+    state: link
+    force: yes                                    # delete existing file if it exists

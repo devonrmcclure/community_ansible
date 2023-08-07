@@ -1,0 +1,9 @@
+- name: delete target user
+  hosts: "{{ target_ip }}"
+  become: true
+  tasks:
+    - name: user example not present
+      ansible.builtin.user:
+        name: "{{ target_user }}"
+        state: "absent"
+        remove: true
